@@ -18,8 +18,8 @@ class Model(db.Model):
 
     model_id = db.Column(db.Integer, primary_key=True, autoincrement=True)
     year = db.Column(db.Integer, nullable=False)
-    brand_name = db.Column(db.String(50), db.ForeignKey("Brand.brand_name"),
-                           nullable=True) #QUESTION FOR MEGGIE: NULL? DEFAULT?
+    brand_name = db.Column(db.String(50), db.ForeignKey("Brands.brand_name"),
+                           nullable=False) #QUESTION FOR MEGGIE: NULL? DEFAULT?
     model_name = db.Column(db.String(50), nullable=False)
 
     brand = db.relationship("Brand",
