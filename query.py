@@ -116,8 +116,8 @@ init_app()
 # Fill in the following functions. (See directions for more info.)
 
 def get_model_info(year):
-    '''Takes in a year, and prints out each model, brand_name, and brand
-    headquarters for that year using only ONE database query.'''
+    """Takes in a year, and prints out each model, brand_name, and brand
+    headquarters for that year using only ONE database query."""
 
     results = (db.session.query(Model.brand_name,
                                Model.model_name,
@@ -140,8 +140,8 @@ def get_model_info(year):
 
 
 def get_brands_summary():
-    '''Prints out each brand name, and each model name for that brand
-     using only ONE database query.'''
+    """Prints out each brand name, and each model name for that brand
+     using only ONE database query."""
 
     results = (db.session.query(Model.brand_name, Model.model_name)
                          .group_by(Model.model_name)
@@ -162,12 +162,29 @@ def get_brands_summary():
 
 
 # Part 2.5: Advanced and Optional
-def search_brands_by_name(mystr):
-    pass
+def search_brands_by_name(str):
+    """Takes a string and returns (as a list of Brand objects) all brands
+    whose name contains the given string"""
 
+    results = (db.session.query(Brand)
+                         .filter(Brand.brand_name.like("%" + str + "%"))
+                         .all())
 
+    return results
+
+# NOTE THAT THIS IS AMBIGUOUSLY STATED: SHOULD THE RANGE BE INCLUSIVE
+# OR EXCLUSIVE? GOING WITH INCLUSIVE
 def get_models_between(start_year, end_year):
-    pass
+    """Takes an inclusive range of years and returns all models from
+    that range"""
+
+    results = (db.session.query(Model)
+                         .filter(Model.year >= start_year,
+                                 Model.year <= end_year)
+                         .order_by(Model.year, Model.brand_name)
+                         .all())
+
+    return results
 
 # -------------------------------------------------------------------
 
