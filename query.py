@@ -68,22 +68,50 @@ db.session.query(Model)
 
 
 # Get all models that are older than 1960.
-db.session.query(Model).filter(Model.year < 1960).all()
+db.session.query(Model)
+          .filter(Model.year < 1960)
+          .all()
 # it should be noted that ascii vs unicode just ate an hour of my life I'll
 # never get back. *sigh*
 
 
 # Get all brands that were founded after 1920.
-db.session.query(Brand).filter(Brand.yr_founded > 1920).all()
+db.session.query(Brand)
+          .filter(Brand.yr_founded > 1920)
+          .all()
 
 
 # Get all models with names that begin with "Cor".
+db.session.query(Model)
+          .filter(Model.model_name.like("Cor%"))
+          .all()
+
 
 # Get all brands with that were founded in 1903 and that are not yet discontinued.
+db.session.query(Brand)
+          .filter(Brand.yr_founded == 1903, 
+                  Brand.yr_discontinued.is_(None))
+          .all()
+
 
 # Get all brands with that are either discontinued or founded before 1950.
+db.session.query(Brand)
+          .filter((Brand.yr_discontinued.isnot(None)) | 
+                  (Brand.yr_founded < 1950))
+          .all()
+# This is ambiguously-worded. Above is the D, or F before 1950 reading.
+# Below is the D or F, before 1950 reading.
+db.session.query(Brand)
+          .filter((Brand.yr_discontinued < 1950) | 
+                  (Brand.yr_founded < 1950))
+          .all()
+
 
 # Get any model whose brand_name is not Chevrolet.
+db.session.query(Model)
+          .filter(Model.brand_name != "Chevrolet")
+          .all()
+
 
 # Fill in the following functions. (See directions for more info.)
 
