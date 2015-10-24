@@ -119,8 +119,8 @@ def get_model_info(year):
     '''Takes in a year, and prints out each model, brand_name, and brand
     headquarters for that year using only ONE database query.'''
 
-    results = (db.session.query(Model.model_name,
-                               Model.brand_name,
+    results = (db.session.query(Model.brand_name,
+                               Model.model_name,
                                Brand.HQ_location)
                          .join(Brand)
                          .filter(Model.year == year)
@@ -130,17 +130,33 @@ def get_model_info(year):
     print "(Brand Model, Brand HQ)"
 
     for result in results:
-        model, brand, HQ = result
+        brand, model, HQ = result
         result_str = "{brand} {model}, {HQ}"
-        print result_str.format(brand=brand, model=model, HQ=HQ)
+        print result_str.format(brand=brand.encode("utf-8"),
+                                model=model,
+                                HQ=HQ)
 
     print
+
 
 def get_brands_summary():
     '''Prints out each brand name, and each model name for that brand
      using only ONE database query.'''
 
-    pass
+    results = (db.session.query(Model.brand_name, Model.model_name)
+                         .group_by(Model.model_name)
+                         .order_by(Model.brand_name)
+                         .all())
+
+    print "\n\n--------------- Models ---------------"
+
+    for result in results:
+        brand, model = result
+        result_str = "{brand} {model}"
+        print result_str.format(brand=brand.encode("utf-8"),
+                                model=model)
+
+    print
 
 # -------------------------------------------------------------------
 
