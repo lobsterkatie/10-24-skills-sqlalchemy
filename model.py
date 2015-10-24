@@ -32,8 +32,10 @@ class Model(db.Model):
         # repr_string = u""
         repr_string = ("<Model model_id: {id}, year: {year}, " +
                        "brand_name: {brand}, model_name: {model}>")
-        return repr_string.format(id=self.model_id, year=self.year,
-                                 brand=self.brand_name.encode("utf-8"), model=self.model_name)
+        return repr_string.format(id=self.model_id, 
+                                  year=self.year,
+                                  brand=self.brand_name.encode("utf-8"), 
+                                  model=self.model_name)
 
 
 class Brand(db.Model):
@@ -55,9 +57,11 @@ class Brand(db.Model):
         repr_string = ("<Brand brand_id: {id}, brand_name: {name}, " +
                        "yr_founded: {founded}, HQ_location: {HQ}, " +
                        "yr_discontinued: {ended}>")
-        return repr_string.format(id=self.brand_id, name=self.brand_name,
-                                 founded=self.yr_founded, HQ=self.HQ_location,
-                                 ended=self.yr_discontinued)
+        return repr_string.format(id=self.brand_id, 
+                                  name=self.brand_name.encode("utf-8"),
+                                  founded=self.yr_founded, 
+                                  HQ=self.HQ_location,
+                                  ended=self.yr_discontinued)
 
 
 # End Part 1

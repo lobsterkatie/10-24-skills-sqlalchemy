@@ -59,15 +59,23 @@ db.session.query(Brand)
           .filter(Brand.brand_id == 8)
           .one()
 
+
 # Get all models with the **name** Corvette and the **brand_name** Chevrolet.
 db.session.query(Model)
           .filter(Model.model_name == "Corvette", 
                   Model.brand_name == "Chevrolet")
           .all()
 
+
 # Get all models that are older than 1960.
+db.session.query(Model).filter(Model.year < 1960).all()
+# it should be noted that ascii vs unicode just ate an hour of my life I'll
+# never get back. *sigh*
+
 
 # Get all brands that were founded after 1920.
+db.session.query(Brand).filter(Brand.yr_founded > 1920).all()
+
 
 # Get all models with names that begin with "Cor".
 
