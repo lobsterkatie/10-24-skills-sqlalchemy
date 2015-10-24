@@ -19,7 +19,7 @@ class Model(db.Model):
     model_id = db.Column(db.Integer, primary_key=True, autoincrement=True)
     year = db.Column(db.Integer, nullable=False)
     brand_name = db.Column(db.String(50), db.ForeignKey("Brands.brand_name"),
-                           nullable=False) #QUESTION FOR MEGGIE: NULL? DEFAULT?
+                           nullable=False) #QUESTION FOR MEGGIE: NULL? MADE IT NOT NULL
     model_name = db.Column(db.String(50), nullable=False)
 
     brand = db.relationship("Brand",
@@ -29,10 +29,11 @@ class Model(db.Model):
     def __repr__(self):
         """Make printing the object useful"""
 
+        # repr_string = u""
         repr_string = ("<Model model_id: {id}, year: {year}, " +
                        "brand_name: {brand}, model_name: {model}>")
         return repr_string.format(id=self.model_id, year=self.year,
-                                 brand=self.brand_name, model=self.model_name)
+                                 brand=self.brand_name.encode("utf-8"), model=self.model_name)
 
 
 class Brand(db.Model):

@@ -55,9 +55,15 @@ init_app()
 # Part 2: Write queries
 
 # Get the brand with the **id** of 8.
+db.session.query(Brand)
+          .filter(Brand.brand_id == 8)
+          .one()
 
 # Get all models with the **name** Corvette and the **brand_name** Chevrolet.
-
+db.session.query(Model)
+          .filter(Model.model_name == "Corvette", 
+                  Model.brand_name == "Chevrolet")
+          .all()
 
 # Get all models that are older than 1960.
 
