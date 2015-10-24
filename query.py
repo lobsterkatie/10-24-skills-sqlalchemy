@@ -15,6 +15,9 @@ from model import *
 
 init_app()
 
+# QUERIES BELOW COMMENTED OUT SO FUNCTIONS WILL RUN. UNCOMMENT OUT TO SEE
+# PRETTY COLORS.
+
 # # -------------------------------------------------------------------
 # # Start here.
 
@@ -190,7 +193,24 @@ def get_models_between(start_year, end_year):
 
 # Part 3: Discussion Questions (Include your answers as comments.)
 
-# 1. What is the returned value and datatype of ``Brand.query.filter_by(name='Ford')``?
+# 1. What is the returned value and datatype of 
+# ``Brand.query.filter_by(brand_name='Ford')``?
 
-# 2. In your own words, what is an association table, and what *type* of relationship
-# does an association table manage?
+# As stated, this is just a query, not a result. So you get a 
+# flask_sqlalchemy.BaseQuery object. If you were to add .one() to the end
+# of the query, you'd get a Brand object.
+
+
+# 2. In your own words, what is an association table, and what *type* of 
+# relationship does an association table manage?
+
+# An association table acts as the midlleman (middleperson?) in a many-to-many
+# relationship, because such relatinships do not *actually* work in DB design.
+# For example, if you want tables A and B to have an M2M relationship, you'd 
+# create a table AB which just had AB pairings in it, along with a constraint 
+# that the pairings be unique. Then each of A and B would have a one-to-many 
+# relationship to the AB table. If, however, there were actual *information* 
+# associated with the pairing (so the AB table would have more than just id, A, 
+# and B fields), then the relationsips would work the same way but a) the unique
+# constraint likely wouldn't apply, and b) it wouldn't count as an association 
+# table.
