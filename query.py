@@ -18,10 +18,44 @@ init_app()
 # -------------------------------------------------------------------
 # Start here.
 
+# PART 1.5: PLAY WITH SQL TO CHANGE COLUMN NAMES
+    # STEP 1: CREATE A NEW TABLE WITH THE NEW COLUMN NAMES
+    CREATE TABLE Models2 (
+    ...> model_id INTEGER PRIMARY KEY,
+    ...> year INT(4) NOT NULL, 
+    ...> brand_name VARCHAR(50) NOT NULL,
+    ...> model_name VARCHAR(50) NOT NULL
+    ...> );
+
+    # STEP 2: COPY DATA FROM OLD TABLE INTO NEW TABLE
+    INSERT INTO Models2 SELECT * FROM Models;
+
+    # STEP 3: DROP OLD TABLE
+    DROP TABLE Models;
+
+    # STEP 4: RENAME NEW TABLE TO OLD NAME
+    ALTER TABLE Models2 RENAME TO Models;
+
+    # STEP 5: DO IT ALL AGAIN WITH THE OTHER TABLE
+    CREATE TABLE Brands2 (
+    ...> brand_id INTEGER PRIMARY KEY,
+    ...> brand_name VARCHAR(50) NOT NULL UNIQUE,
+    ...> yr_founded INT(4),
+    ...> HQ_location VARCHAR(50),
+    ...> yr_discontinued INT(4)
+    ...> );
+    # THEN
+    INSERT INTO Brands2 SELECT * FROM Brands;
+    # THEN
+    DROP TABLE Brands;
+    # AND FINALLY
+    ALTER TABLE Brands2 RENAME TO Brands;
+
 
 # Part 2: Write queries
 
 # Get the brand with the **id** of 8.
+
 
 # Get all models with the **name** Corvette and the **brand_name** Chevrolet.
 

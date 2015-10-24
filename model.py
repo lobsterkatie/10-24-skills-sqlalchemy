@@ -31,7 +31,7 @@ class Model(db.Model):
 
         repr_string = ("<Model model_id: {id}, year: {year}, " +
                        "brand_name: {brand}, model_name: {model}>")
-        print repr_string.format(id=self.model_id, year=self.year,
+        return repr_string.format(id=self.model_id, year=self.year,
                                  brand=self.brand_name, model=self.model_name)
 
 
@@ -51,10 +51,10 @@ class Brand(db.Model):
     def __repr__(self):
         """Make printing the object useful"""
 
-        repr_string = ("Brand brand_id: {id}, brand_name: {name}, " +
+        repr_string = ("<Brand brand_id: {id}, brand_name: {name}, " +
                        "yr_founded: {founded}, HQ_location: {HQ}, " +
-                       "yr_discontinued: {ended}")
-        print repr_string.format(id=self.brand_id, name=self.brand_name,
+                       "yr_discontinued: {ended}>")
+        return repr_string.format(id=self.brand_id, name=self.brand_name,
                                  founded=self.yr_founded, HQ=self.HQ_location,
                                  ended=self.yr_discontinued)
 
